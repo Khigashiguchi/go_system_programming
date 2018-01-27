@@ -2,14 +2,14 @@ package main
 
 import (
 	"io"
-	"net/http"
+	"os"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "http.ResponseWriter sample")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	file, err := os.Create("multiwriter.txt")
+	if err != nil {
+		panic(err)
+	}
+	writer := io.MultiWriter(file, os.Stdout)
+	io.WriteString(writer, "io.Mulitwriter example\n")
 }
