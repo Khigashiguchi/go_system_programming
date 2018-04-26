@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"os"
+	"bytes"
 )
 
 func dumpChunk(chunk io.Reader) {
@@ -13,6 +14,11 @@ func dumpChunk(chunk io.Reader) {
 	buffer := make([]byte, 4)
 	chunk.Read(buffer)
 	fmt.Printf("chunk '%v' (%d bytes)\n", string(buffer), length)
+	if bytes.Equal(buffer, []byte("tEXt")) {
+		rawText := make([]byte, length)
+		chunk.Read(rawText)
+		fmt.Println(string(rawText))
+	}
 }
 
 func readChunks(file *os.File) []io.Reader {
