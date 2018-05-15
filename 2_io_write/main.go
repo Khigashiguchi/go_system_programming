@@ -10,6 +10,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	request.Header.Set("X-TEST", "TEST_HEADER")
 	request.Write(os.Stdout)
 }

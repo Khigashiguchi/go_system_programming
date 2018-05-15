@@ -35,7 +35,7 @@ func main() {
 			response := http.Response{
 				StatusCode: 200,
 				ProtoMajor: 1,
-				ProtoMinor: 1,
+				ProtoMinor: 0,
 				Body: ioutil.NopCloser(strings.NewReader("Hello World\n")),
 			}
 			response.Write(conn)
