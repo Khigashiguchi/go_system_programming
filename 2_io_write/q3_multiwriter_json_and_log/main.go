@@ -25,6 +25,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	gz.Header.Name = "test.json"
 	writer := io.MultiWriter(gz, os.Stdout)
 	io.WriteString(writer, string(jsonBytes))
+	encoder := json.NewEncoder(os.Stdout)
+	encoder.Encode(writer)
 	gz.Flush()
 }
 
